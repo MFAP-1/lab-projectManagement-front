@@ -16,7 +16,7 @@ function Signup() {
 
   const history = useHistory();
 
-  const { loggedInUser, setLoggedInUser } = useContext(authContext);
+  const { loggedInUser } = useContext(authContext);
 
   useEffect(() => {
     // Caso o usuário já esteja logado, redirecione para página principal

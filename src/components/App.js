@@ -12,6 +12,8 @@ import PrivateRoute from "./auth/PrivateRoute";
 import ProjectList from "./project/ProjectList";
 import ProjectDetail from "./project/ProjectDetail";
 import ProjectDelete from "./project/ProjectDelete";
+import ProjectEdit from "./project/ProjectEdit";
+import TaskEdit from "./project/TaskEdit";
 
 function App() {
   return (
@@ -23,11 +25,18 @@ function App() {
           <Route path="/cadastro-usuario" component={Signup} />
           <Route path="/login" component={Login} />
           <PrivateRoute exact path="/projetos" component={ProjectList} />
+          <PrivateRoute exact path="/task/update/:id" component={TaskEdit} />
+
           <Switch>
             <PrivateRoute
               exact
               path="/projeto/deletar/:id"
               component={ProjectDelete}
+            />
+            <PrivateRoute
+              exact
+              path="/projeto/edit/:id"
+              component={ProjectEdit}
             />
             <PrivateRoute exact path="/projeto/:id" component={ProjectDetail} />
           </Switch>

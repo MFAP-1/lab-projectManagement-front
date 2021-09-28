@@ -67,7 +67,12 @@ function ProjectDetail() {
         <>
           <h3>{projectDetails.name}</h3>
           <div className="w-100 my-3 d-flex justify-content-end">
-            <button className="btn btn-sm btn-warning me-2">Editar</button>
+            <button
+              className="btn btn-sm btn-warning me-2"
+              onClick={() => history.push(`/projeto/edit/${id}`)}
+            >
+              Editar
+            </button>
             <button
               className="btn btn-sm btn-danger"
               onClick={() => handleModalOpen()} // Ao clicar no botão deletar, perguntamos ao usuário se ele tem certeza
@@ -134,7 +139,11 @@ function ProjectDetail() {
             {projectDetails.tasks
               .filter((taskObj) => taskObj.status === "A fazer")
               .map((taskObj) => (
-                <TaskCard taskObj={taskObj} />
+                <TaskCard
+                  taskObj={taskObj}
+                  handleModalOpen={handleModalOpen}
+                  setTaskCreated={setTaskCreated}
+                />
               ))}
           </div>
         </div>
@@ -144,7 +153,11 @@ function ProjectDetail() {
             {projectDetails.tasks
               .filter((taskObj) => taskObj.status === "Fazendo")
               .map((taskObj) => (
-                <TaskCard taskObj={taskObj} />
+                <TaskCard
+                  taskObj={taskObj}
+                  handleModalOpen={handleModalOpen}
+                  setTaskCreated={setTaskCreated}
+                />
               ))}
           </div>
         </div>
@@ -154,7 +167,11 @@ function ProjectDetail() {
             {projectDetails.tasks
               .filter((taskObj) => taskObj.status === "Feito")
               .map((taskObj) => (
-                <TaskCard taskObj={taskObj} />
+                <TaskCard
+                  taskObj={taskObj}
+                  handleModalOpen={handleModalOpen}
+                  setTaskCreated={setTaskCreated}
+                />
               ))}
           </div>
         </div>

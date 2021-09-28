@@ -4,10 +4,13 @@ import { useHistory } from "react-router-dom";
 import api from "../../apis/api";
 
 import LoadingSpinner from "../LoadingSpinner";
+import ProjectCreate from "./ProjectCreate";
 
 function ProjectList() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [projectCreated, setProjectCreated] = useState(false);
 
   const history = useHistory();
 
@@ -19,13 +22,16 @@ function ProjectList() {
         const response = await api.get("/project"); // api é a instância pré-configurada do Axios que injeta automaticamente o token de autenticação definida no arquivo apis/api.js
         setProjects([...response.data]);
         setLoading(false);
+        if (projectCreated) {
+          setProjectCreated(false);
+        }
       } catch (err) {
         console.error(err);
         setLoading(false);
       }
     }
     fetchProjects();
-  }, []);
+  }, [projectCreated]);
 
   return (
     <div>
@@ -65,6 +71,23 @@ function ProjectList() {
           </tbody>
         </table>
       )}
+      <div>
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="btn btn-primary"
+        >
+          Novo projeto
+        </button>
+
+        {showForm ? (
+          <div className="col-5">
+            <ProjectCreate
+              handleClose={setShowForm}
+              setProjectCreated={setProjectCreated}
+            />
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
